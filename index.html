@@ -291,19 +291,63 @@
       <!-- Concurrent Work. -->
       <div class="columns is-centered has-text-centered">
         <div class="column is-full-width">
-          <h2 class="title is-3">Method Overview</h2>
+          <h2 class="title is-3">Overview of Syn-ZoomGS</h2>
           <div class="content has-text-justified">
-            <img src="./static/images/pipeline.png">
+            <img src="./static/images/pipeline_synzoomgs.png">
 
             <p>
-              Overview of the proposed method.
-              (a) Data preparation for data factory.
-              We collect multi-view dual-camera images and calibrate their camera extrinsic and intrinsic parameters.
-              (b) Construction of ZoomGS in data factory.
-              ZoomGS employs a camera transition (CamTrans) module to transform the base (i.e., UW camera) Gaussians to the specific camera Gaussians according to the camera encoding.
-              (c) Data generation from data factory.
-              The virtual (V) camera parameters are constructed by interpolating the dual-camera ones, and are then input into ZoomGS to generate zoom sequences.
-              (d) Fine-tuning a frame interpolation (FI) model with the constructed zoom sequences.
+              (a)The pipline of Syn-ZoomGS. Syn-ZoomGS first sample camera parameters of UW and W from 
+              data Distribution, calculate and interpolate camera parameter. Then it render image sequence from reconstructed 3DGS representation. Finally it samples
+              color transformation parameters from color Distribution and interpolates them, and applies them to the rendered images. (b) Statistics of Geometric 
+              transformation parameters. (c) Statistics of Color transformation parameters.
+            </p>
+
+          </div>
+
+
+        </div>
+      </div>
+      <!--/ Concurrent Work. -->
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Concurrent Work. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Overview of Real-ZoomGS</h2>
+          <div class="content has-text-justified">
+            <img src="./static/images/pipeline_realzoomgs.png">
+
+            <p>
+              (a) Over view of Real-ZoomGS. The virtual (V) camera parameters are constructed by interpolating the dual-camera ones, and are then input into ZoomGS 
+              to generate zoom sequences. (b) Construction of Real-ZoomGS. Real-ZoomGS employs a camera transition (CamTrans) module to transform the base 
+              (ie, UW camera) Gaussians to the specific camera Gaussians according to the camera encoding.
+            </p>
+
+          </div>
+
+
+        </div>
+      </div>
+      <!--/ Concurrent Work. -->
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Concurrent Work. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Overview of ZoomFI</h2>
+          <div class="content has-text-justified">
+            <img src="./static/images/FI_model.png">
+
+            <p>
+              The Structure of our ZoomFI, a specialized FI model for photo-realistic zooming between dual cameras.
             </p>
 
           </div>
