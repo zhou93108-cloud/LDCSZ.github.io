@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-Z1DSNXW1K2"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-Z1DSNXW1K2");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Learning Dual-Camera Smooth Zoom via Decoupled Geometric-Photometric Data Synthesis"
+    />
+    <title>Learning Dual-Camera Smooth Zoom via Decoupled Geometric-Photometric Data Synthesis</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="css/bootstrap-icons.min.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/main.css" />
+
+    <!-- Blocking theme script to prevent FOUC -->
+    <script>
+      (function () {
+        var theme = localStorage.getItem("theme");
+        if (!theme) {
+          theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+        }
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
+  </head>
+
+  <body class="home-page">
+    <!-- Navigation -->
+    <nav
+      id="navbar-main"
+      class="navbar navbar-expand-lg navbar-light border-bottom fixed-top"
+    >
+      <div class="container">
+        <div class="col-lg-10 mx-auto px-0">
+          <div class="navbar-content-wrapper">
+            <a href="index.html" class="navbar-brand d-flex align-items-center">
+              <span>Learning Dual-Camera Smooth Zoom via Decoupled Geometric-Photometric Data Synthesis</span>
+            </a>
+            <button
+              class="navbar-toggler ms-auto"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="page-content">
+      <!-- Hero Section -->
+      <section id="top" class="pt-4 pb-3">
+        <div class="container">
+          <div class="col-lg-10 mx-auto">
+            <div class="text-center">
+              <div
+                class="d-flex align-items-center justify-content-center mb-3"
+               >
+                <div class="text-start">
+                  <style>
+                    div {text-align:center;}
+                  </style>
+                  <h1 class="mb-0">
+                    <div>
+                      <span style="font-weight: 750">Learning Dual-Camera Smooth Zoom via </span>
+                      <span style="font-weight: 750">Decoupled Geometric-Photometric Data Synthesis</span>
+                    </div>
+                  </h1>
+                </div>
+              </div>
+              <!-- Authors -->
+              <div class="authors-section mt-3 mb-4">
+                <div class="author-list">
+                  <span class="author"
+                    ><a href="https://scholar.google.com/citations?user=UpOaYLoAAAAJ&hl=zh-CN" target="_blank"
+                      >Renlong Wu</a
+                    ><sup
+                      >1</sup
+                    ></span
+                  ><span class="author"
+                    ><a href="https://scholar.google.com/citations?user=8pIq2N0AAAAJ&hl=zh-CN&oi=ao" target="_blank"
+                      >Zhilu Zhang</a
+                    ><sup>1</sup></span
+                  ><span class="author"
+                    ><a href="https://scholar.google.com/citations?user=rUOpCEYAAAAJ&hl=zh-CN&oi=ao" target="_blank">Wangmeng Zuo</a
+                    ><sup>2</sup></span
+                  >
+                </div>
+                <div class="author-venue">TPAMI 2026</div>
+              </div>
+
+              <div class="mb-4">
+                <div class="d-flex flex-wrap gap-3 justify-content-center">
+                  <a
+                    href="-"
+                    class="btn btn-outline-danger"
+                    style="width: 200px"
+                    target="_blank"
+                  >
+                    <i class="bi bi-file-pdf me-1"></i>Paper
+                  </a>
+                  <a
+                    href="-"
+                    class="btn btn-outline-primary"
+                    style="width: 200px"
+                    target="_blank"
+                  >
+                    <i class="bi bi-github me-1"></i>Code
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Brief Problem Statement -->
+      <section class="pt-0 pb-3">
+        <div class="container">
+          <div class="col-lg-8 mx-auto">
+            <div class="bg-light rounded-3 p-3 shadow-sm">
+              <div class="left-align">
+                <p class="mb-0">
+                    When zooming between dual cameras on smart-
+                    phones, prominent discontinuities in both geometric perspective
+                    and color rendition inevitably degrade the visual experience of
+                    users. To address this, we introduce the dual-camera smooth
+                    zoom (DCSZ) task, aiming to synthesize continuous intermediate
+                    frames for fluid zooming. However, directly applying existing
+                    video frame interpolation (VFI) models to this task is severely
+                    hindered by substantial domain gaps and the physical intractabil-
+                    ity of capturing real-world continuous ground truth. To this
+                    end, we propose a novel data synthesis framework to generate
+                    high-fidelity DCSZ training sequences, named ZoomGS v2. It
+                    explicitly decouples geometric trajectories and photometric trans-
+                    formations from 3D representation modeling, thereby enabling
+                    extensive data generation from easily accessible single-camera
+                    3D scenes. Furthermore, we design ZoomFI, a specialized VFI
+                    network tailored to the DCSZ task, which leverages comple-
+                    mentary bidirectional optical flows for comprehensive dual-
+                    camera information fusion. Extensive experiments on real-world
+                    datasets of two mobile phones demonstrate that training with our
+                    constructed DCSZ data significantly improves the performance
+                    of various VFI models. Moreover, the proposed ZoomFI achieves
+                    state-of-the-art results in both quantitative metrics and visual
+                    quality. The datasets, codes, and pre-trained models will be
+                    publicly available.
+              </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DCSZ Introduction Section -->
+      <section id="method" class="py-3">
+        <div class="container">
+          <div class="col-lg-10 mx-auto">
+            <h2 class="mb-3">DCSZ Overview</h2>
+            <img src="./assets/images/intro.png">
+
+            <div class="mb-4">
+              <div class="left-align">
+                <p>
+                  (a) Existing dual-camera digital zoom. For zoom transitions between UW and W cameras (i.e., from ×0.6 to ×1.0), commercial smartphones generally crop the corresponding region from the UW image and resize it to the target dimensions. When the zoom factor transitions from ×0.9 to ×1.0, the active lens switches abruptly from UW to W, inducing severe geometric perspective and color rendition discontinuities in the preview.<br />
+                  (b) The proposed dual-camera smooth zoom (DCSZ) pipeline.<br />
+                  (c) Visual illustration of geometric and color discontinuities in conventional dual-camera zoom previews.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Method Section -->
+      <section id="method" class="py-3">
+        <div class="container">
+          <div class="col-lg-10 mx-auto">
+            <h2 class="mb-3">Overview of ZoomGS v2</h2>
+            <img src="./assets/images/pipline_synzoomgs.png">
+
+            <div class="mb-4">
+              <div class="left-align">
+                <p>
+                  (a) Pipline of ZoomGS. ZoomGS models the scene with a Base Gaussians and use CamTrans Module to learn spatial and photometric transitions between the two endpoint 3DGS, and then transform the Base Gaussians to target Gaussians of virtual cameras for rendering.<br />
+                  (b) Pipline of ZoomGS v2. ZoomGS v2 first calibrate distribution of camera and color parameters from small dual-camera data, and then applies them to Gaussians constructed from large single-camera data for 3D scene rendering. The producted example on the right illustrates that ZoomGS v2 generates images with better quality than ZoomGS
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ZoomFI Section -->
+      <section id="method" class="py-3">
+        <div class="container">
+          <div class="col-lg-10 mx-auto">
+            <h2 class="mb-3">Overview of ZoomFI</h2>
+            <div class="i1-img">
+                <img src="./assets/images/FI_model.png">
+            </div>
+            <div class="mb-4">
+              <div class="left-align">
+                <p>
+                    Previous VFI architectures struggle with the asymmetric corre-
+                    spondences and large geometric displacements between dual-
+                    camera views. To address this issue, we propose ZoomFI,
+                    a dedicated VFI model tailored to the DCSZ task, as shown above.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Results Section -->
+      <section id="method" class="py-3">
+        <div class="container">
+          <div class="col-lg-10 mx-auto">
+            <h2 class="mb-3">VFI Results</h2>
+            <img src="./assets/images/result.png">
+
+            <div class="mb-4">
+              <div class="left-align">
+                <p>
+                  Quantitative comparisons of VFI models trained on data from ZoomGS v2 or from ZoomGS on real-world dataset.  
+                  The results show that the VFI models fine-tuned on ZoomGS v2 achieve a significant performance improvement over ZoomGS on DCSZ task, and the performance of our ZoomFI surpasses other VFI models.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Video Comparisons (Side by Side, all methods) -->
+      <section class="py-3">
+        <div class="container">
+          <div class="col-lg-10 mx-auto">
+            <!-- <p class="text-muted small mb-3">
+              Click the left/right buttons for different scenes and use tabs
+              to switch between methods.
+            </p> -->
+            <h2 class="mb-3">Comparisons of ZoomGS v2 and ZoomGS</h2>
+
+            <div class="video-tabs-container">
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link active"
+                    id="tab-noposplat"
+                    data-bs-toggle="tab"
+                    data-bs-target="#content-noposplat"
+                    type="button"
+                    role="tab"
+                    aria-controls="content-noposplat"
+                    aria-selected="true"
+                  >
+                    Xiaomi x0.6→x1.0
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="tab-depthsplat"
+                    data-bs-toggle="tab"
+                    data-bs-target="#content-depthsplat"
+                    type="button"
+                    role="tab"
+                    aria-controls="content-depthsplat"
+                    aria-selected="false"
+                  >
+                    Xiaomi x0.85→x1.0
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="tab-flash3d"
+                    data-bs-toggle="tab"
+                    data-bs-target="#content-flash3d"
+                    type="button"
+                    role="tab"
+                    aria-controls="content-flash3d"
+                    aria-selected="false"
+                  >
+                    Huawei x0.6→x1.0
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="tab-huawei85"
+                    data-bs-toggle="tab"
+                    data-bs-target="#content-huawei85"
+                    type="button"
+                    role="tab"
+                    aria-controls="content-huawei85"
+                    aria-selected="false"
+                  >
+                    Huawei x0.85→x1.0
+                  </button>
+                </li>
+              </ul>
+              <div class="tab-content">
+                <!-- Tab 1: xiaomi06 -->
+                <div
+                  class="tab-pane fade show active"
+                  id="content-noposplat"
+                  role="tabpanel"
+                  aria-labelledby="tab-noposplat"
+                >
+                  <div
+                    data-video-comparator="sidebyside"
+                    data-config='{
+                      "videoGroups": [
+                        {
+                          "caption": "Scene 1",
+                          "left": {
+                            "video": "assets/video/xiaomi06_v1_zoomgs_94_00002.mp4",
+                            "label": "ZoomGS"
+                          },
+                          "right": {
+                            "video": "assets/video/xiaomi06_v2_zoomgs_94_00002.mp4",
+                            "label": "ZoomGS v2"
+                          }
+                        },
+                        {
+                          "caption": "Scene 2",
+                          "left": {
+                            "video": "assets/video/xiaomi06_v1_zoomgs_0205.mp4",
+                            "label": "ZoomGS"
+                          },
+                          "right": {
+                            "video": "assets/video/xiaomi06_v2_zoomgs_0205.mp4",
+                            "label": "ZoomGS v2"
+                          }
+                        },
+                        {
+                          "caption": "Scene 3",
+                          "left": {
+                            "video": "assets/video/xiaomi06_v1_zoomgs_0214.mp4",
+                            "label": "ZoomGS"
+                          },
+                          "right": {
+                            "video": "assets/video/xiaomi06_v2_zoomgs_0214.mp4",
+                            "label": "ZoomGS v2"
+                          }
+                        }
+                      ]
+                    }'
+                  ></div>
+                </div>
+
+                <!-- Tab 2: xiaomi85 -->
+                <div
+                  class="tab-pane fade"
+                  id="content-depthsplat"
+                  role="tabpanel"
+                  aria-labelledby="tab-depthsplat"
+                >
+                  <div
+                    data-video-comparator="sidebyside"
+                    data-config='{
+                      "videoGroups": [
+                        {
+                          "caption": "Scene 1",
+                          "left": {
+                            "video": "assets/video/xiaomi85_v1_zoomgs_0211.mp4",
+                            "label": "ZoomGS"
+                          },
+                          "right": {
+                            "video": "assets/video/xiaomi85_v2_zoomgs_0211.mp4",
+                            "label": "ZoomGS v2"
+                          }
+                        },
+                        {
+                          "caption": "Scene 2",
+                          "left": {
+                            "video": "assets/video/xiaomi85_v1_zoomgs_0238.mp4",
+                            "label": "ZoomGS"
+                          },
+                          "right": {
+                            "video": "assets/video/xiaomi85_v2_zoomgs_0238.mp4",
+                            "label": "ZoomGS v2"
+                          }
+                        },
+                        {
+                          "caption": "Scene 3",
+                          "left": {
+                            "video": "assets/video/xiaomi85_v1_zoomgs_18_00002.mp4",
+                            "label": "ZoomGS"
+                          },
+                          "right": {
+                            "video": "assets/video/xiaomi85_v2_zoomgs_18_00002.mp4",
+                            "label": "ZoomGS v2"
+                          }
+                        }
+                      ]
+                    }'
+                  ></div>
+                </div>
+
+                <!-- Tab 3: huawei06 -->
+                <div
+                  class="tab-pane fade"
+                  id="content-flash3d"
+                  role="tabpanel"
+                  aria-labelledby="tab-flash3d"
+                >
+                  <div
+                    data-video-comparator="sidebyside"
+                    data-config='{
+                      "videoGroups": [
+                        {
+                          "caption": "Scene 1",
+                          "left": {
+                            "video": "assets/video/huawei06_v1_zoomgs_028.mp4",
+                            "label": "ZoomGS"
+                          },
+                          "right": {
+                            "video": "assets/video/huawei06_v2_zoomgs_028.mp4",
+                            "label": "ZoomGS v2"
+                          }
+                        },
+                        {
+                          "caption": "Scene 2",
+                          "left": {
+                            "video": "assets/video/huawei06_v1_zoomgs_045.mp4",
+                            "label": "ZoomGS"
+                          },
+                          "right": {
+                            "video": "assets/video/huawei06_v2_zoomgs_045.mp4",
+                            "label": "ZoomGS v2"
+                          }
+                        },
+                        {
+                          "caption": "Scene 3",
+                          "left": {
+                            "video": "assets/video/huawei06_v1_zoomgs_009.mp4",
+                            "label": "ZoomGS"
+                          },
+                          "right": {
+                            "video": "assets/video/huawei06_v2_zoomgs_009.mp4",
+                            "label": "ZoomGS v2"
+                          }
+                        }
+                      ]
+                    }'
+                  ></div>
+                </div>
+
+                <!-- Tab 4: huawei85 -->
+                <div
+                  class="tab-pane fade"
+                  id="content-huawei85"
+                  role="tabpanel"
+                  aria-labelledby="tab-huawei85"
+                >
+                  <div
+                    data-video-comparator="sidebyside"
+                    data-config='{
+                      "videoGroups": [
+                        {
+                          "caption": "Scene 1",
+                          "left": {
+                            "video": "assets/video/huawei85_v1_zoomgs_016.mp4",
+                            "label": "ZoomGS"
+                          },
+                          "right": {
+                            "video": "assets/video/huawei85_v2_zoomgs_016.mp4",
+                            "label": "ZoomGS v2"
+                          }
+                        },
+                        {
+                          "caption": "Scene 2",
+                          "left": {
+                            "video": "assets/video/huawei85_v1_zoomgs_022.mp4",
+                            "label": "ZoomGS"
+                          },
+                          "right": {
+                            "video": "assets/video/huawei85_v2_zoomgs_022.mp4",
+                            "label": "ZoomGS v2"
+                          }
+                        },
+                        {
+                          "caption": "Scene 3",
+                          "left": {
+                            "video": "assets/video/huawei85_v1_zoomgs_008.mp4",
+                            "label": "ZoomGS"
+                          },
+                          "right": {
+                            "video": "assets/video/huawei85_v2_zoomgs_008.mp4",
+                            "label": "ZoomGS v2"
+                          }
+                        }
+                      ]
+                    }'
+                  ></div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Image Comparisons xiaomi 0.6 -->
+      <section class="py-3">
+        <div class="container">
+          <div class="col-lg-10 mx-auto">
+            <h2 class="mb-3">Xiaomi Image Comparisons</h2>
+
+            <!-- 0.6 Inputs -->
+            <p class="text-muted small mb-3">
+              Compare ZoomFI with RIFE, AMT and VFIMAMBA in Xiaomi dataset, x0.6→x1.0
+            </p>
+
+            <div
+              data-image-comparator="row"
+              data-config='{
+                "images": [
+                  {"src": "assets/images1/xiaomi06_13_00002_zoomgs.png", "alt": "ZoomFI", "label": "ZoomGS"},
+                  {"src": "assets/images1/xiaomi06_13_00002_rife.png", "alt": "RIFE", "label": "RIFE"},
+                  {"src": "assets/images1/xiaomi06_13_00002_amt.png", "alt": "AMT", "label": "AMT"},
+                  {"src": "assets/images1/xiaomi06_13_00002_mamba.png", "alt": "VFIMAMBA", "label": "VFIMAMBA"},
+                  {"src": "assets/images1/xiaomi06_13_00002_UW.png", "alt": "UW", "label": "UW"},
+                  {"src": "assets/images1/xiaomi06_13_00002_W.png", "alt": "W", "label": "W"}
+                ],
+                "showHoverHint": false
+              }'
+            ></div>
+
+            <div
+              data-image-comparator="row"
+              data-config='{
+                "images": [
+                  {"src": "assets/images1/xiaomi06_19_00002_zoomgs.png", "alt": "ZoomFI", "label": "ZoomGS"},
+                  {"src": "assets/images1/xiaomi06_19_00002_rife.png", "alt": "RIFE", "label": "RIFE"},
+                  {"src": "assets/images1/xiaomi06_19_00002_amt.png", "alt": "AMT", "label": "AMT"},
+                  {"src": "assets/images1/xiaomi06_19_00002_mamba.png", "alt": "VFIMAMBA", "label": "VFIMAMBA"},
+                  {"src": "assets/images1/xiaomi06_19_00002_UW.png", "alt": "UW", "label": "UW"},
+                  {"src": "assets/images1/xiaomi06_19_00002_W.png", "alt": "W", "label": "W"}
+                ],
+                "showHoverHint": false
+              }'
+            ></div>
+
+            <div
+              data-image-comparator="row"
+              data-config='{
+                "images": [
+                  {"src": "assets/images1/xiaomi06_52_00002_zoomgs.png", "alt": "ZoomFI", "label": "ZoomGS"},
+                  {"src": "assets/images1/xiaomi06_52_00002_rife.png", "alt": "RIFE", "label": "RIFE"},
+                  {"src": "assets/images1/xiaomi06_52_00002_amt.png", "alt": "AMT", "label": "AMT"},
+                  {"src": "assets/images1/xiaomi06_52_00002_mamba.png", "alt": "VFIMAMBA", "label": "VFIMAMBA"},
+                  {"src": "assets/images1/xiaomi06_52_00002_UW.png", "alt": "UW", "label": "UW"},
+                  {"src": "assets/images1/xiaomi06_52_00002_W.png", "alt": "W", "label": "W"}
+                ],
+                "showHoverHint": false
+              }'
+            ></div>
+
+            <!-- 0.85 Inputs -->
+            <p class="text-muted small mb-3">
+              Compare ZoomFI with RIFE, AMT and VFIMAMBA in Xiaomi dataset, x0.85→x1.0
+            </p>
+
+            <div
+              data-image-comparator="row"
+              data-config='{
+                "images": [
+                  {"src": "assets/images1/xiaomi85_0202_zoomgs.png", "alt": "ZoomFI", "label": "ZoomGS"},
+                  {"src": "assets/images1/xiaomi85_0202_rife.png", "alt": "RIFE", "label": "RIFE"},
+                  {"src": "assets/images1/xiaomi85_0202_amt.png", "alt": "AMT", "label": "AMT"},
+                  {"src": "assets/images1/xiaomi85_0202_mamba.png", "alt": "VFIMAMBA", "label": "VFIMAMBA"},
+                  {"src": "assets/images1/xiaomi85_0202_UW.png", "alt": "UW", "label": "UW"},
+                  {"src": "assets/images1/xiaomi85_0202_W.png", "alt": "W", "label": "W"}
+                ],
+                "showHoverHint": false
+              }'
+            ></div>
+
+            <div
+              data-image-comparator="row"
+              data-config='{
+                "images": [
+                  {"src": "assets/images1/xiaomi85_49_00002_zoomgs.png", "alt": "ZoomFI", "label": "ZoomGS"},
+                  {"src": "assets/images1/xiaomi85_49_00002_rife.png", "alt": "RIFE", "label": "RIFE"},
+                  {"src": "assets/images1/xiaomi85_49_00002_amt.png", "alt": "AMT", "label": "AMT"},
+                  {"src": "assets/images1/xiaomi85_49_00002_mamba.png", "alt": "VFIMAMBA", "label": "VFIMAMBA"},
+                  {"src": "assets/images1/xiaomi85_49_00002_UW.png", "alt": "UW", "label": "UW"},
+                  {"src": "assets/images1/xiaomi85_49_00002_W.png", "alt": "W", "label": "W"}
+                ],
+                "showHoverHint": false
+              }'
+            ></div>
+
+            <div
+              data-image-comparator="row"
+              data-config='{
+                "images": [
+                  {"src": "assets/images1/xiaomi85_0211_zoomgs.png", "alt": "ZoomFI", "label": "ZoomGS"},
+                  {"src": "assets/images1/xiaomi85_0211_rife.png", "alt": "RIFE", "label": "RIFE"},
+                  {"src": "assets/images1/xiaomi85_0211_amt.png", "alt": "AMT", "label": "AMT"},
+                  {"src": "assets/images1/xiaomi85_0211_mamba.png", "alt": "VFIMAMBA", "label": "VFIMAMBA"},
+                  {"src": "assets/images1/xiaomi85_0211_UW.png", "alt": "UW", "label": "UW"},
+                  {"src": "assets/images1/xiaomi85_0211_W.png", "alt": "W", "label": "W"}
+                ],
+                "showHoverHint": false
+              }'
+            ></div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Image Comparisons xiaomi 0.85 -->
+      <section class="py-3">
+        <div class="container">
+          <div class="col-lg-10 mx-auto">
+            <h2 class="mb-3">Huawei Image Comparisons</h2>
+
+            <!-- 0.6 Inputs -->
+            <p class="text-muted small mb-3">
+              Compare ZoomFI with RIFE, AMT and VFIMAMBA in Huawei dataset, x0.6→x1.0
+            </p>
+
+            <div
+              data-image-comparator="row"
+              data-config='{
+                "images": [
+                  {"src": "assets/images1/huawei06_039_zoomgs.png", "alt": "ZoomFI", "label": "ZoomGS"},
+                  {"src": "assets/images1/huawei06_039_rife.png", "alt": "RIFE", "label": "RIFE"},
+                  {"src": "assets/images1/huawei06_039_amt.png", "alt": "AMT", "label": "AMT"},
+                  {"src": "assets/images1/huawei06_039_mamba.png", "alt": "VFIMAMBA", "label": "VFIMAMBA"},
+                  {"src": "assets/images1/huawei06_039_UW.png", "alt": "UW", "label": "UW"},
+                  {"src": "assets/images1/huawei06_039_W.png", "alt": "W", "label": "W"}
+                ],
+                "showHoverHint": false
+              }'
+            ></div>
+
+            <div
+              data-image-comparator="row"
+              data-config='{
+                "images": [
+                  {"src": "assets/images1/huawei06_044_zoomgs.png", "alt": "ZoomFI", "label": "ZoomGS"},
+                  {"src": "assets/images1/huawei06_044_rife.png", "alt": "RIFE", "label": "RIFE"},
+                  {"src": "assets/images1/huawei06_044_amt.png", "alt": "AMT", "label": "AMT"},
+                  {"src": "assets/images1/huawei06_044_mamba.png", "alt": "VFIMAMBA", "label": "VFIMAMBA"},
+                  {"src": "assets/images1/huawei06_044_UW.png", "alt": "UW", "label": "UW"},
+                  {"src": "assets/images1/huawei06_044_W.png", "alt": "W", "label": "W"}
+                ],
+                "showHoverHint": false
+              }'
+            ></div>
+
+            <div
+              data-image-comparator="row"
+              data-config='{
+                "images": [
+                  {"src": "assets/images1/huawei06_035_zoomgs.png", "alt": "ZoomFI", "label": "ZoomGS"},
+                  {"src": "assets/images1/huawei06_035_rife.png", "alt": "RIFE", "label": "RIFE"},
+                  {"src": "assets/images1/huawei06_035_amt.png", "alt": "AMT", "label": "AMT"},
+                  {"src": "assets/images1/huawei06_035_mamba.png", "alt": "VFIMAMBA", "label": "VFIMAMBA"},
+                  {"src": "assets/images1/huawei06_035_UW.png", "alt": "UW", "label": "UW"},
+                  {"src": "assets/images1/huawei06_035_W.png", "alt": "W", "label": "W"}
+                ],
+                "showHoverHint": false
+              }'
+            ></div>
+
+            <!-- 0.85 Inputs -->
+            <p class="text-muted small mb-3">
+              Compare ZoomFI with RIFE, AMT and VFIMAMBA in Huawei dataset, x0.85→x1.0
+            </p>
+
+            <div
+              data-image-comparator="row"
+              data-config='{
+                "images": [
+                  {"src": "assets/images1/huawei85_046_zoomgs.png", "alt": "ZoomFI", "label": "ZoomGS"},
+                  {"src": "assets/images1/huawei85_046_rife.png", "alt": "RIFE", "label": "RIFE"},
+                  {"src": "assets/images1/huawei85_046_amt.png", "alt": "AMT", "label": "AMT"},
+                  {"src": "assets/images1/huawei85_046_mamba.png", "alt": "VFIMAMBA", "label": "VFIMAMBA"},
+                  {"src": "assets/images1/huawei85_046_UW.png", "alt": "UW", "label": "UW"},
+                  {"src": "assets/images1/huawei85_046_W.png", "alt": "W", "label": "W"}
+                ],
+                "showHoverHint": false
+              }'
+            ></div>
+
+            <div
+              data-image-comparator="row"
+              data-config='{
+                "images": [
+                  {"src": "assets/images1/huawei85_018_zoomgs.png", "alt": "ZoomFI", "label": "ZoomGS"},
+                  {"src": "assets/images1/huawei85_018_rife.png", "alt": "RIFE", "label": "RIFE"},
+                  {"src": "assets/images1/huawei85_018_amt.png", "alt": "AMT", "label": "AMT"},
+                  {"src": "assets/images1/huawei85_018_mamba.png", "alt": "VFIMAMBA", "label": "VFIMAMBA"},
+                  {"src": "assets/images1/huawei85_018_UW.png", "alt": "UW", "label": "UW"},
+                  {"src": "assets/images1/huawei85_018_W.png", "alt": "W", "label": "W"}
+                ],
+                "showHoverHint": false
+              }'
+            ></div>
+
+            <div
+              data-image-comparator="row"
+              data-config='{
+                "images": [
+                  {"src": "assets/images1/huawei85_014_zoomgs.png", "alt": "ZoomFI", "label": "ZoomGS"},
+                  {"src": "assets/images1/huawei85_014_rife.png", "alt": "RIFE", "label": "RIFE"},
+                  {"src": "assets/images1/huawei85_014_amt.png", "alt": "AMT", "label": "AMT"},
+                  {"src": "assets/images1/huawei85_014_mamba.png", "alt": "VFIMAMBA", "label": "VFIMAMBA"},
+                  {"src": "assets/images1/huawei85_014_UW.png", "alt": "UW", "label": "UW"},
+                  {"src": "assets/images1/huawei85_014_W.png", "alt": "W", "label": "W"}
+                ],
+                "showHoverHint": false
+              }'
+            ></div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Citation Section -->
+      <section class="py-3">
+        <div class="container">
+          <div class="col-lg-10 mx-auto">
+            <h2 class="mb-3">Citation</h2>
+            <p>
+              If you find our work useful in your research, please consider
+              citing:
+            </p>
+            <div class="citation-block">
+              <button
+                class="citation-copy-btn"
+                onclick="
+                  navigator.clipboard
+                    .writeText(
+                      document.getElementById('bibtex-content').textContent,
+                    )
+                    .then(() => {
+                      var b = this;
+                      b.textContent = 'Copied!';
+                      setTimeout(() => {
+                        b.textContent = 'Copy';
+                      }, 2000);
+                    })
+                "
+              >
+                Copy
+              </button>
+              <div class="left-align">
+                <pre><code id="bibtex-content">@inproceedings{-,
+    title     = {Learning Dual-Camera Smooth Zoom via Decoupled Geometric-Photometric Data Synthesis},
+    author    = {Lao, Yixing and Bai, Xuyang and Wu, Xiaoyang and Yan, Nuoyuan and Luo, Zixin and Fang, Tian and Nahmias, Jean-Daniel and Tsin, Yanghai and Li, Shiwei and Zhao, Hengshuang},
+    booktitle = {-},
+    year      = {-},
+}</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+    <!-- Comparator Utilities -->
+    <script src="js/VideoComparatorUtils.js"></script>
+
+    <!-- Video Comparator Classes -->
+    <script src="js/VideoSideBySideComparator.js"></script>
+    <script src="js/VideoSliderComparator.js"></script>
+
+    <!-- Image Comparator -->
+    <script src="js/ImageComparisonRow.js"></script>
+
+    <!-- Main JS -->
+    <script src="js/main.js"></script>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top-btn" title="Back to Top">
+      <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <script src="js/backToTop.js"></script>
+
+    <!-- Browser detection script -->
+    <script>
+      (function () {
+        function isChromiumBased() {
+          var ua = navigator.userAgent.toLowerCase();
+          return (
+            ua.indexOf("chrome") > -1 ||
+            ua.indexOf("crios") > -1 ||
+            typeof window.chrome !== "undefined"
+          );
+        }
+        if (!isChromiumBased()) {
+          var el = document.getElementById("chrome-browser-text");
+          if (el) {
+            el.style.color = "#b30000";
+            el.style.fontWeight = "bold";
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
