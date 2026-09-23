@@ -2,10 +2,11 @@
 <html lang="en">
   <head>
     <!-- Google tag (gtag.js) -->
-    <script
+    <!-- <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-Z1DSNXW1K2"
-    ></script>
+    ></script> -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GTM-NPG7T2RG"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -103,6 +104,12 @@
                 <div class="author-list">
                   <span class="author"
                     ><a href="https://scholar.google.com/citations?user=UpOaYLoAAAAJ&hl=zh-CN" target="_blank"
+                      >Junjie Fan</a
+                    ><sup
+                      >1</sup
+                    ></span
+                  ><span class="author"
+                    ><a href="https://scholar.google.com/citations?user=UpOaYLoAAAAJ&hl=zh-CN" target="_blank"
                       >Renlong Wu</a
                     ><sup
                       >1</sup
@@ -112,11 +119,14 @@
                       >Zhilu Zhang</a
                     ><sup>1</sup></span
                   ><span class="author"
+                    ><a href="https://scholar.google.com/citations?user=rUOpCEYAAAAJ&hl=zh-CN&oi=ao" target="_blank">Dazhi Zhang</a
+                    ><sup>2</sup></span
+                  ><span class="author"
                     ><a href="https://scholar.google.com/citations?user=rUOpCEYAAAAJ&hl=zh-CN&oi=ao" target="_blank">Wangmeng Zuo</a
                     ><sup>2</sup></span
                   >
                 </div>
-                <div class="author-venue">TPAMI 2026</div>
+                <!-- <div class="author-venue">TPAMI 2026</div> -->
               </div>
 
               <div class="mb-4">
@@ -150,7 +160,12 @@
           <div class="col-lg-8 mx-auto">
             <div class="bg-light rounded-3 p-3 shadow-sm">
               <div class="left-align">
-                <p class="mb-0">
+                <style>
+                    p {text-indent:1em;
+                        display: inline-block;
+                        text-align: justify;} 
+                </style>
+                <p>
                     When zooming between dual cameras on smart-
                     phones, prominent discontinuities in both geometric perspective
                     and color rendition inevitably degrade the visual experience of
@@ -175,7 +190,7 @@
                     state-of-the-art results in both quantitative metrics and visual
                     quality. The datasets, codes, and pre-trained models will be
                     publicly available.
-              </p>
+                </p>
               </div>
             </div>
           </div>
@@ -191,11 +206,16 @@
 
             <div class="mb-4">
               <div class="left-align">
-                <p>
-                  (a) Existing dual-camera digital zoom. For zoom transitions between UW and W cameras (i.e., from ×0.6 to ×1.0), commercial smartphones generally crop the corresponding region from the UW image and resize it to the target dimensions. When the zoom factor transitions from ×0.9 to ×1.0, the active lens switches abruptly from UW to W, inducing severe geometric perspective and color rendition discontinuities in the preview.<br />
-                  (b) The proposed dual-camera smooth zoom (DCSZ) pipeline.<br />
-                  (c) Visual illustration of geometric and color discontinuities in conventional dual-camera zoom previews.
-                </p>
+                <style>
+                    p {text-indent:1em;
+                       margin-top: 0px;
+                       margin-bottom: 0px;
+                      display: inline-block;
+                        text-align: justify; } 
+                </style>
+                <p>(a) Existing dual-camera digital zoom. For zoom transitions between UW and W cameras (i.e., from ×0.6 to ×1.0), commercial smartphones generally crop the corresponding region from the UW image and resize it to the target dimensions. When the zoom factor transitions from ×0.9 to ×1.0, the active lens switches abruptly from UW to W, inducing severe geometric perspective and color rendition discontinuities in the preview.<br /></p>
+                <p>(b) The proposed dual-camera smooth zoom (DCSZ) pipeline.<br /></p>
+                <p>(c) Visual illustration of geometric and color discontinuities in conventional dual-camera zoom previews.</p>
               </div>
             </div>
           </div>
@@ -206,13 +226,20 @@
       <section id="method" class="py-3">
         <div class="container">
           <div class="col-lg-10 mx-auto">
-            <h2 class="mb-3">Overview of ZoomGS v2</h2>
+            <h2 class="mb-3">Video results of ZoomGS v2 and ZoomGS</h2>
             <img src="./assets/images/pipline_synzoomgs.png">
 
             <div class="mb-4">
               <div class="left-align">
+                <style>
+                    p {text-indent:1em;
+                    display: inline-block;
+                        text-align: justify;} 
+                </style>
                 <p>
                   (a) Pipline of ZoomGS. ZoomGS models the scene with a Base Gaussians and use CamTrans Module to learn spatial and photometric transitions between the two endpoint 3DGS, and then transform the Base Gaussians to target Gaussians of virtual cameras for rendering.<br />
+                </p>
+                <p>
                   (b) Pipline of ZoomGS v2. ZoomGS v2 first calibrate distribution of camera and color parameters from small dual-camera data, and then applies them to Gaussians constructed from large single-camera data for 3D scene rendering. The producted example on the right illustrates that ZoomGS v2 generates images with better quality than ZoomGS
                 </p>
               </div>
@@ -231,6 +258,11 @@
             </div>
             <div class="mb-4">
               <div class="left-align">
+                <style>
+                    p {text-indent:1em;
+                      display: inline-block;
+                        text-align: justify;} 
+                </style>
                 <p>
                     Previous VFI architectures struggle with the asymmetric corre-
                     spondences and large geometric displacements between dual-
@@ -252,6 +284,11 @@
 
             <div class="mb-4">
               <div class="left-align">
+                <style>
+                    p {text-indent:1em;
+                       display: inline-block;
+                        text-align: justify;} 
+                </style>
                 <p>
                   Quantitative comparisons of VFI models trained on data from ZoomGS v2 or from ZoomGS on real-world dataset.  
                   The results show that the VFI models fine-tuned on ZoomGS v2 achieve a significant performance improvement over ZoomGS on DCSZ task, and the performance of our ZoomFI surpasses other VFI models.
@@ -493,22 +530,22 @@
                         {
                           "caption": "Scene 1",
                           "left": {
-                            "video": "assets/video/huawei85_v1_zoomgs_008.mp4",
+                            "video": "assets/video/huawei85_v1_zoomgs_022.mp4",
                             "label": "ZoomGS"
                           },
                           "right": {
-                            "video": "assets/video/huawei85_v2_zoomgs_008.mp4",
+                            "video": "assets/video/huawei85_v2_zoomgs_022.mp4",
                             "label": "ZoomGS v2"
                           }
                         },
                         {
                           "caption": "Scene 2",
                           "left": {
-                            "video": "assets/video/huawei85_v1_zoomgs_022.mp4",
+                            "video": "assets/video/huawei85_v1_zoomgs_008.mp4",
                             "label": "ZoomGS"
                           },
                           "right": {
-                            "video": "assets/video/huawei85_v2_zoomgs_022.mp4",
+                            "video": "assets/video/huawei85_v2_zoomgs_008.mp4",
                             "label": "ZoomGS v2"
                           }
                         },
@@ -785,7 +822,7 @@
               <div class="left-align">
                 <pre><code id="bibtex-content">@inproceedings{-,
     title     = {Learning Dual-Camera Smooth Zoom via Decoupled Geometric-Photometric Data Synthesis},
-    author    = {Lao, Yixing and Bai, Xuyang and Wu, Xiaoyang and Yan, Nuoyuan and Luo, Zixin and Fang, Tian and Nahmias, Jean-Daniel and Tsin, Yanghai and Li, Shiwei and Zhao, Hengshuang},
+    author    = {Junjie Fan, Zhilu Zhang, Renlong Wu, Dazhi Zhang and Wangmeng Zuo},
     booktitle = {-},
     year      = {-},
 }</code></pre>
